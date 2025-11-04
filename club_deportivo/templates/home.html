@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title%}Inicio{% endblock %}
+{%load static %}
+{% block others_css%}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h2>¡Únete a nuestro Club Deportivo!</h2>
+        <p>Disfruta de instalaciones de primera clase, entrenadores profesionales y una comunidad apasionada por el deporte.</p>
+        <a href="#" class="btn">Más Información</a>
+    </section>
+
+{% endblock %}
