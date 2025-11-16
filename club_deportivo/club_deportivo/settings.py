@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "gestion_socios",
     "gestion_deportistas",
+    "gestion_deportes",
+    
 ]
 
 MIDDLEWARE = [
