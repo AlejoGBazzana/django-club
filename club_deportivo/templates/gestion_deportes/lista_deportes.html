@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title%}Deportes{% endblock %}
+{%load static %}
+{% block otros_css%}
+<link rel="stylesheet" href="{% static 'css/Deportes.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h2>Deportes</h2>
+        {% if deportes %}
+        <div class="deportes-container">
+            {% for deporte in deportes %}
+                <div class="deporte-card">
+                    <h3>{{ deporte.nombre }}</h3>
+                </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>No hay deportes disponibles.</p>
+        {% endif %}
+    </section>
+{% endblock %}

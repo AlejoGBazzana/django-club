@@ -13,9 +13,7 @@
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Inicio</a></li>
-                <li><a href="#">Socios</a></li>
-                <li><a href="#">Deportistas</a></li>
-                <li><a href="#">Eventos</a></li>
+                <li><a href="{% url 'gestion_deportes:lista_deportes' %}">Deportes</a></li>
             </ul>
         </nav>
     </header>
