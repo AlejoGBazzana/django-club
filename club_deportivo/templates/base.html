@@ -4,24 +4,28 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Club Deportivo</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>{% block title %}Club Deportivo{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block otros_css %}{% endblock %}
 </head>
 <body>
-    <header>
-        <h1>Bienvenido al Club Deportivo</h1>
-        <nav>
-            <ul>
-                <li><a href="{% url 'home' %}">Inicio</a></li>
-                <li><a href="{% url 'gestion_deportes:lista_deportes' %}">Deportes</a></li>
-            </ul>
-        </nav>
+    <header class="site-header">
+        <div class="container" style="display:flex;align-items:center;gap:1rem;">
+            <div class="site-brand">
+                <span class="logo" aria-hidden="true"></span>
+                Club Deportivo
+            </div>
+            <nav class="nav-right">
+                <a class="nav-link" href="{% url 'home' %}">Inicio</a>
+                <a class="nav-link" href="{% url 'gestion_deportes:lista_deportes' %}">Deportes</a>
+            </nav>
+        </div>
     </header>
-    <main>
+    <main class="container">
         {% block content %}
         <!-- Contenido específico de cada página -->
         {% endblock %}
     </main>
-    <footer>
+    <footer class="site-footer container">
         <p>&copy; 2024 Club Deportivo. Todos los derechos reservados.</p>
     </footer>
