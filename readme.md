@@ -3,8 +3,7 @@
 - Clona el repositorio (si no lo hiciste):
 
 ```powershell
-cd C:\Users\Alejo\Documents\Proyectos_DJango
-git clone <URL_DEL_REPO>
+git clone https://github.com/AlejoGBazzana/django-club.git
 cd django-club\club_deportivo
 ```
 
@@ -55,14 +54,6 @@ Abre `http://127.0.0.1:8000/` en tu navegador y `http://127.0.0.1:8000/admin` pa
 - **Admin**: interfaz de administración de Django disponible en `/admin` (registra modelos en `admin.py` para que aparezcan).
 
 **Atajos y notas útiles**
-- Si no ves tus modelos en el admin, añade en cada app el archivo `admin.py` con, por ejemplo:
-
-```python
-from django.contrib import admin
-from .models import Deporte  # o Deportista
-
-admin.site.register(Deporte)
-```
 
 - Crear datos de ejemplo rápidamente desde el shell:
 
@@ -82,10 +73,4 @@ p = Deportista.objects.create(nombre='Ana', edad=25)
 - `manage.py` : script de administración.
 - `club_deportivo/settings.py` : configuración del proyecto (apps instaladas, base de datos, staticfiles).
 - `templates/` : plantillas base y específicas.
-- `static/css/base.css` : estilos del tema oscuro.
-
-¿Quieres que:
-- registre automáticamente los modelos en `admin.py` (puedo añadir los archivos)?
-- genere un fixture JSON con datos de ejemplo para cargar con `python manage.py loaddata <fixture>`?
-- añada un `requirements.txt` con la versión de Django utilizada en desarrollo?
-
+- `static/css/base.css` : estilos.
