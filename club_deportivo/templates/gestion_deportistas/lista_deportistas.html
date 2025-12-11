@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Deportistas{% endblock %}
+{% block content %}
+  <section class="hero">
+    <h2>Deportistas</h2>
+    {% if request.user.is_staff %}
+      <a href="{% url 'gestion_deportistas:crear_deportista' %}" class="btn">Crear Deportista</a>
+    {% endif %}
+  </section>
+  <div class="deportes-container">
+    {% for d in deportistas %}
+      <div class="deporte-card">
+        <h3>{{ d.nombre }}</h3>
+        <p>Edad: {{ d.edad }}</p>
+        <p class="muted">Deportes: {{ d.deportes.all|join:", " }}</p>
+        {% if request.user.is_staff %}
+          <a href="{% url 'gestion_deportistas:editar_deportista' d.pk %}" class="btn secondary">Editar</a>
+          <a href="{% url 'gestion_deportistas:eliminar_deportista' d.pk %}" class="btn secondary" style="background:#ff6b6b">Eliminar</a>
+        {% endif %}
+      </div>
+    {% empty %}
+      <p>No hay deportistas.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

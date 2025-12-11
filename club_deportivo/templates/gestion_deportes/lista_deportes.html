@@ -9,16 +9,26 @@
 {% block content %}
     <section class="hero">
         <h2>Deportes</h2>
-        {% if deportes %}
-        <div class="deportes-container">
-            {% for deporte in deportes %}
-                <div class="deporte-card">
-                    <h3>{{ deporte.nombre }}</h3>
-                </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <p>No hay deportes disponibles.</p>
+        {% if request.user.is_staff %}
+            <a href="{% url 'gestion_deportes:crear_deporte' %}" class="btn">Crear Deporte</a>
         {% endif %}
     </section>
+    <div class="deportes-container">
+        {% for deporte in deportes %}
+            <div class="deporte-card">
+                <h3>
+                    <a href="{% url 'gestion_deportes:detalle_deporte' deporte.pk %}" style="color: inherit; text-decoration: none;">
+                        {{ deporte.nombre }}
+                    </a>
+                </h3>
+                <p class="muted">{{ deporte.deportistas.count }} deportistas</p>
+                {% if request.user.is_staff %}
+                    <a href="{% url 'gestion_deportes:editar_deporte' deporte.pk %}" class="btn secondary">Editar</a>
+                    <a href="{% url 'gestion_deportes:eliminar_deporte' deporte.pk %}" class="btn secondary" style="background:#ff6b6b">Eliminar</a>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No hay deportes disponibles.</p>
+        {% endfor %}
+    </div>
 {% endblock %}

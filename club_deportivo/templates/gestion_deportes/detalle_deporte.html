@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}{{ deporte.nombre }}{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <h2>{{ deporte.nombre }}</h2>
+    <p class="muted">{{ deportistas.count }} deportistas en este deporte</p>
+    {% if request.user.is_staff %}
+      <a href="{% url 'gestion_deportes:editar_deporte' deporte.pk %}" class="btn secondary">Editar</a>
+      <a href="{% url 'gestion_deportes:eliminar_deporte' deporte.pk %}" class="btn secondary" style="background:#ff6b6b">Eliminar</a>
+      <a href="{% url 'gestion_deportes:lista_deportes' %}" class="btn">Volver</a>
+    {% endif %}
+  </section>
+  <div class="deportes-container">
+    {% if deportistas %}
+      {% for deportista in deportistas %}
+        <div class="deporte-card">
+          <h3>{{ deportista.nombre }}</h3>
+          <p>Edad: {{ deportista.edad }}</p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No hay deportistas en este deporte aún.</p>
+    {% endif %}
+  </div>
+{% endblock %}
