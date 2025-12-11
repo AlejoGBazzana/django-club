@@ -23,4 +23,5 @@ urlpatterns = [
     path('', home, name='home'),
     path('deportes/', include(('gestion_deportes.urls', 'gestion_deportes'), namespace='gestion_deportes')),
     path('deportistas/', include(('gestion_deportistas.urls', 'gestion_deportistas'), namespace='gestion_deportistas')),
+    path('socios/', include(('gestion_socios.urls', 'gestion_socios'), namespace='gestion_socios')),
 ]

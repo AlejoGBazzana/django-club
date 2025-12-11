@@ -8,6 +8,10 @@ def lista_deportistas(request):
     deportistas = Deportista.objects.all() # Obtiene todos los deportistas desde la base de datos
     return render(request, 'gestion_deportistas/lista_deportistas.html', {'deportistas': deportistas}) # Renderiza la plantilla con la lista de deportistas
 
+def detalle_deportista(request, pk):
+    deportista = get_object_or_404(Deportista, pk=pk)
+    return render(request, 'gestion_deportistas/detalle_deportista.html', {'deportista': deportista})
+
 @staff_member_required
 def crear_deportista(request):
     form = DeportistaForm(request.POST or None)

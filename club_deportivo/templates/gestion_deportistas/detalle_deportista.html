@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ deportista.nombre }}{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h2>{{ deportista.nombre }}</h2>
+    <div style="margin-bottom: 1rem;">
+        <p><strong>Edad:</strong> {{ deportista.edad }}</p>
+    </div>
+
+    <div>
+        {% if request.user.is_staff %}
+            <a href="{% url 'gestion_deportistas:editar_deportista' deportista.pk %}" class="btn secondary">Editar</a>
+            <a href="{% url 'gestion_deportistas:eliminar_deportista' deportista.pk %}" class="btn secondary" style="background:#ff6b6b">Eliminar</a>
+        {% endif %}
+        <a href="{% url 'gestion_deportistas:lista_deportistas' %}" class="btn">Volver al listado</a>
+    </div>
+</section>
+{% endblock %}
