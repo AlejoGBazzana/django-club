@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Socios{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h2>Listado de Socios</h2>
+        {% if request.user.is_staff %}
+            <a href="{% url 'gestion_socios:crear_socio' %}" class="btn">Registrar Nuevo Socio</a>
+        {% endif %}
+    </section>
+
+    <div class="deportes-container">
+        {% for socio in socios %}
+            <div class="deporte-card">
+                <h3>
+                    <a href="{% url 'gestion_socios:detalle_socio' socio.pk %}" style="color: inherit; text-decoration: none;">
+                        {{ socio.nombre }} {{ socio.apellido }}
+                    </a>
+                </h3>
+                <p>Email: {{ socio.email }}</p>
+                <p class="muted">Miembro desde: {{ socio.fecha_inscripcion|date:"d/m/Y" }}</p>
+                
+                {% if request.user.is_staff %}
+                    <div style="margin-top: 1rem;">
+                        <a href="{% url 'gestion_socios:editar_socio' socio.pk %}" class="btn secondary">Editar</a>
+                        <a href="{% url 'gestion_socios:eliminar_socio' socio.pk %}" class="btn secondary" style="background:#ff6b6b">Eliminar</a>
+                    </div>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No hay socios registrados.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

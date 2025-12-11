@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{ socio.nombre }} {{ socio.apellido }}{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h2>{{ socio.nombre }} {{ socio.apellido }}</h2>
+    <div style="margin-bottom: 1rem;">
+        <p><strong>Email:</strong> {{ socio.email }}</p>
+        <p><strong>Fecha de Inscripción:</strong> {{ socio.fecha_inscripcion }}</p>
+    </div>
+
+    <div>
+        {% if request.user.is_staff %}
+            <a href="{% url 'gestion_socios:editar_socio' socio.pk %}" class="btn secondary">Editar</a>
+            <a href="{% url 'gestion_socios:eliminar_socio' socio.pk %}" class="btn secondary" style="background:#ff6b6b">Eliminar</a>
+        {% endif %}
+        <a href="{% url 'gestion_socios:lista_socios' %}" class="btn">Volver al listado</a>
+    </div>
+</section>
+{% endblock %}

@@ -10,7 +10,11 @@
   <div class="deportes-container">
     {% for d in deportistas %}
       <div class="deporte-card">
-        <h3>{{ d.nombre }}</h3>
+        <h3>
+            <a href="{% url 'gestion_deportistas:detalle_deportista' d.pk %}" style="color: inherit; text-decoration: none;">
+                {{ d.nombre }}
+            </a>
+        </h3>
         <p>Edad: {{ d.edad }}</p>
         <p class="muted">Deportes: {{ d.deportes.all|join:", " }}</p>
         {% if request.user.is_staff %}

@@ -1,76 +1,95 @@
-**Instalación**
-- **Requisitos**: Python 3.10+ y Git instalados.
-- Clona el repositorio (si no lo hiciste):
+# Club Deportivo - Sistema de Gestión
 
-```powershell
-git clone https://github.com/AlejoGBazzana/django-club.git
-cd django-club\club_deportivo
-```
+**Materia:** Programación 2  
+**Carrera:** Tecnicatura Universitaria en Programación – UTN FRLP  
+**Año:** 2025  
 
-- Crea y activa un entorno virtual (PowerShell):
+## 1. Descripción del Proyecto
 
-```powershell
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-```
+Este proyecto es una aplicación web desarrollada en **Django** para la gestión integral de un club deportivo. Su objetivo es centralizar la administración de las entidades principales de la institución, permitiendo un control eficiente de:
 
-- Instala dependencias (si existe `requirements.txt`):
+*   **Deportes:** Altas, bajas y modificaciones de las disciplinas ofrecidas.
+*   **Deportistas:** Gestión de atletas y su asignación a diferentes deportes.
+*   **Socios:** Registro y control de los miembros del club.
 
-```powershell
-pip install -r requirements.txt
-# Si no existe requirements.txt instala Django
-pip install django
-```
+El sistema implementa una arquitectura **MVT (Modelo-Vista-Template)** modular, asegurando escalabilidad y mantenimiento sencillo. Cuenta con un frontend responsivo y un panel de administración seguro.
 
-- Crea y aplica migraciones:
+## 2. Características Principales
 
-```powershell
-python manage.py makemigrations
-python manage.py migrate
-```
+*   **CRUD Completo:** Funcionalidad de Crear, Leer, Actualizar y Eliminar para todas las entidades (Deportes, Deportistas, Socios).
+*   **Seguridad:** Vistas protegidas que requieren autenticación de 'staff' para operaciones de modificación (decorador `@staff_member_required`).
+*   **Diseño Modular:** Separación lógica en tres aplicaciones independientes (`gestion_deportes`, `gestion_deportistas`, `gestion_socios`).
+*   **Interfaz de Usuario:** Plantillas HTML5/CSS3 con herencia (`extends`), diseño limpio y navegación intuitiva.
+*   **Testing:** Pruebas unitarias integradas para asegurar la calidad del código.
 
-- Crea un superusuario para acceder al admin:
+## 3. Instalación y Ejecución
 
-```powershell
-python manage.py createsuperuser
-```
+Sigue estos pasos para levantar el proyecto en tu entorno local.
 
-- Ejecuta el servidor de desarrollo:
+### Requisitos Previos
+*   Python 3.10 o superior
+*   Git
 
-```powershell
-python manage.py runserver
-```
+### Pasos
 
-Abre `http://127.0.0.1:8000/` en tu navegador y `http://127.0.0.1:8000/admin` para el panel de administración.
+1.  **Clonar el repositorio:**
+    ```powershell
+    git clone https://github.com/AlejoGBazzana/django-club.git
+    cd django-club
+    ```
 
-**Descripción**
-- Este proyecto es una aplicación sencilla para gestionar un club deportivo. Permite organizar deportes, deportistas y socios en aplicaciones separadas, ofrece vistas públicas para listar recursos y una interfaz de administración para gestionar datos.
+2.  **Crear y activar el entorno virtual:**
+    ```powershell
+    python -m venv venv
+    .\venv\Scripts\Activate
+    ```
 
-**Características implementadas**
-- **Apps**: `gestion_deportes`, `gestion_deportistas`, `gestion_socios`.
-- **Modelos básicos**: entidades para `Deporte` y `Deportista` (revisa `gestion_deportes/models.py` y `gestion_deportistas/models.py`).
-- **Vistas y plantillas**: plantillas en `templates/` (por ejemplo `templates/gestion_deportes/lista_deportes.html`) y plantilla base en `templates/base.html`.
-- **Estilos**: tema oscuro deportivo en `static/css/base.css` y carga desde `templates/base.html`.
-- **Admin**: interfaz de administración de Django disponible en `/admin` (registra modelos en `admin.py` para que aparezcan).
+3.  **Instalar dependencias:**
+    ```powershell
+    pip install -r requirements.txt
+    ```
 
-**Atajos y notas útiles**
+4.  **Aplicar migraciones:**
+    ```powershell
+    cd club_deportivo
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
 
-- Crear datos de ejemplo rápidamente desde el shell:
+5.  **Crear un superusuario (Administrador):**
+    ```powershell
+    python manage.py createsuperuser
+    ```
 
-```powershell
-python manage.py shell
+6.  **Ejecutar el servidor:**
+    ```powershell
+    python manage.py runserver
+    ```
 
-# Dentro del shell (Python):
-from gestion_deportes.models import Deporte
-from gestion_deportistas.models import Deportista
+7.  **Acceso:**
+    *   Sitio público: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+    *   Panel de Administración: [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
 
-d = Deporte.objects.create(nombre='Fútbol')
-p = Deportista.objects.create(nombre='Ana', edad=25)
-# Si existe relación many-to-many: d.deportistas.add(p)
-```
+## 4. Estructura del Proyecto
 
-**Estructura importante**
-- `manage.py` : script de administración.
-- `club_deportivo/settings.py` : configuración del proyecto (apps instaladas, base de datos, staticfiles).
-- `templates/` : plantillas base y específicas.
-- `static/css/base.css` : estilos.
+El proyecto sigue la convención estándar de Django:
+
+*   `club_deportivo/` (Carpeta raíz del proyecto)
+    *   `gestion_deportes/`: App para la lógica de disciplinas deportivas.
+    *   `gestion_deportistas/`: App para la gestión de atletas.
+    *   `gestion_socios/`: App para la administración de la masa societaria.
+    *   `templates/`: Plantillas HTML globales y específicas por app.
+    *   `static/`: Archivos CSS, imágenes y JS.
+
+## 5. Roles del Equipo
+
+| Integrante | Rol Principal | Responsabilidades |
+| :--- | :--- | :--- |
+| **Pedro** | Backend Developer | Desarrollo de modelos, vistas y lógica de negocio. |
+| **Alejo** | Frontend / DevOps | Diseño de templates, estilos CSS y configuración del entorno. |
+| **Colaborador** | QA / Testing | Pruebas unitarias y control de calidad. |
+
+*(Nota: Roles asignados para propósitos de la entrega académica)*
+
+---
+&copy; 2025 Club Deportivo. Todos los derechos reservados.
